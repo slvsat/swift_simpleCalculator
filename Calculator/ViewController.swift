@@ -32,7 +32,7 @@ class ViewController: UIViewController {
             return Double(display.text!)!
         }
         set{
-            display.text = String(newValue)
+            display.text = forTrailingZero(temp: newValue)
         }
     }
     
@@ -45,6 +45,7 @@ class ViewController: UIViewController {
     @IBAction func performOperation(_ sender: UIButton) {
         if userIsInTheMiddleOfTyping{
             brain.setOperand(displayValue)
+            display.text = sender.currentTitle!
             userIsInTheMiddleOfTyping = false
         }
         if let mathSymbol = sender.currentTitle {
@@ -58,5 +59,9 @@ class ViewController: UIViewController {
         
     }
     
+    func forTrailingZero(temp: Double) -> String{
+        let tempVar = String(format: "%g", temp)
+        return tempVar
+    }
 }
 
